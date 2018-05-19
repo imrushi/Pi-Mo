@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">
+          #map{ width:700px; height: 500px; }
+        </style>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+        <title>Save Marker Example</title>
+    </head>
+    <body>
+        <h1></h1>
+        <p>Select your Destiination</p>
+        
+        <!--map div-->
+        <div id="map"></div>
+        
+        <!--our form-->
+        <h2>Chosen Location</h2>
+        <form method="post">
+            <!-- <input type="text" id="lat" readonly="yes"><br>
+            <input type="text" id="lng" readonly="yes">
+        </form> -->
+        <script type="text/javascript" src="map.js"></script>
+            <button id="button" onclick="locate()">Locate my device</button>
+            <!-- <div id="info">
+              <p>Latitude:<BR>
+              <BR>Longitude:<BR> -->
+              <!-- <BR>Margin of error: </p>
+            </div>  -->
+
+    </body>
+</html>

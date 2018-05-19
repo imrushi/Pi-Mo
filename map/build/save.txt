@@ -1,0 +1,59 @@
+<fieldset>
+            <legend><h3>Route Co-ordinates</h3></legend>
+            <fieldset>
+              <legend> Start </legend>
+            
+              <input type="text" id="custom-route-start-lat"/>
+              <script src="../currentlat.txt"></script>
+              <script>
+                    document.getElementById("custom-route-start-lat").value = t1;
+                </script>
+              <input type="text" id="custom-route-start-lng"/>
+              <script src="../currentlong.txt"></script>
+              <script>
+                    document.getElementById("custom-route-start-lng").value = t2;
+                </script>
+            </fieldset>
+            <fieldset>
+              <legend> Destination </legend>
+              <input type="text" id="custom-route-dest-lat"/>
+              <script src="../destlat.txt"></script>
+              <script>
+                    document.getElementById("custom-route-dest-lat").value = t3;
+                </script>
+              <input type="text" id="custom-route-dest-lng" />
+              <script src="../destlong.txt"></script>
+              <script>
+                    document.getElementById("custom-route-dest-lng").value = t4;
+                </script>
+            </fieldset>
+
+            <button id="calc-route-by-form">GO!</button>
+
+          </fieldset>
+
+
+
+          
+
+          var CREDENTIALS = {
+    /*
+     * Access Token for the Mapbox API.
+     * Sign up for a free starter account to get one and find it at
+     * https://www.mapbox.com/account/apps/
+     */
+    mapboxToken: 'pk.eyJ1IjoicGltbyIsImEiOiJjamM1MDB2ZDYxZWtqMnprYTZhYWhiYTNpIn0.l7beML2BAj3HcOloGO-I4g',
+    /*
+     * Id of the map style - you should not need to change this
+     */
+    mapboxId: 'instantnavi.kggpbnd3',
+
+    /*
+     * ffwdme.js uses the open source routing service GraphHopper (https://graphhopper.com/#directions-api)
+     * for the route calculation.
+     * They are pretty awesome and provide us with a free demo API key to try things out.
+     * However, please be fair. Once your project gets more serious you should get in touch at
+     * https://graphhopper.com/#directions-api and obtain your own API key.
+     */
+    graphHopper: 'c62916b3-35a1-4bac-bd03-ab564755ec0d'
+};

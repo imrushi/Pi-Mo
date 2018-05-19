@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+
+            <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"> -->
+
+
+        <style>
+        #map-canvas{
+            width: 480px; 
+            height: 300px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+		color: #ffffff;
+		font-weight: 600;
+		line-height: 1.5;
+		margin: 0 0 1rem 0;
+		text-transform: uppercase;
+		letter-spacing: 0.2rem;
+	}
+
+          h1.major, h2.major, h3.major, h4.major, h5.major, h6.major {
+			border-bottom: solid 1px #ffffff;
+			width: -moz-max-content;
+			width: -webkit-max-content;
+			width: -ms-max-content;
+			width: max-content;
+			padding-bottom: 0.5rem;
+			/* margin: 0 0 2rem 0; */
+        }
+        
+        input[type=text] {
+    width: 130px;
+    /* box-sizing: border-box; */
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    /* background-image: url('searchicon.png'); */
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 80%;
+}
+
+.button {
+    position: relative;
+    background-color: rgb(76, 152, 175);
+    border: none;
+    border-radius:4px;
+    font-size: 15px;
+    color: #FFFFFF;
+    padding: 20px;
+    width: 120px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.button:after {
+    content: "";
+    background: rgb(144, 177, 238);
+    display: block;
+    position: absolute;
+    padding-top: 200%;
+    padding-left: 250%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.button:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.map-responsive{
+    overflow:hidden;
+    padding-bottom:50%;
+    position:relative;
+    height:0;
+}
+.map-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+        </style>
+       
+        <!-- <link rel="stylesheet" href="ass/css/bootstrap.min.css">
+        <script src="ass/css/bootstrap.min.js"></script>
+        <script src="ass/css/mdb.min.js"></script> -->
+        <title>Save Marker Example</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+
+
+    <body>
+            <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <h1></h1>
+        
+        <!-- <div class="modal-content" style="height: 450px">
+        map div -->
+   
+        <input type="text" id="mapsearch" placeholder="Enter Destination">
+        <div id="map-canvas" style="height: 300px"></div><br>
+        
+
+           <center><button id="button" onclick="locate() ,location.href='/map/build/demo.html?debug=true'"  class="button">Start</button></center>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPmDnAQ_k3PrNsURe1wIY6IT5RCRXxjz4&libraries=places"></script>
+    <!-- </div> -->
+    </body>
+
+
+    <script src="build/assets/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="build/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="build/assets/bootstrap/js/bootstrap.js"></script>
+    <script src="build/assets/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+    var map = new google.maps.Map(document.getElementById('map-canvas'),{
+  center:{
+    lat: 19.99133674820168,
+    lng:73.7896728515625
+  },
+  gestureHandling: 'greedy',
+  zoom:15
+});
+
+ var marker = new google.maps.Marker({
+      position:{
+        lat:19.99133674820168 , 
+        lng:73.7896728515625
+      },
+      map:map,
+      draggable: true
+ });
+
+ var searchBox = new google.maps.places.SearchBox(document.getElementById('mapsearch'));
+//place change event on search box
+google.maps.event.addListener(searchBox, 'places_changed', function(){
+      //console.log(sBox.getPlaces());
+      var places = searchBox.getPlaces();
+
+      //bound
+      var bounds = new google.maps.LatLngBounds();
+      var i,place;
+
+      for(i=0; place=places[i]; i++){
+
+        //console.log(place.geometry.location);
+
+        bounds.extend(place.geometry.location);
+        marker.setPosition(place.geometry.location);//set marker position new
+        markerLocation();
+      }
+      map.fitBounds(bounds);//fit to the bound
+      map.setZoom(15);
+});
+
+google.maps.event.addListener(map, 'click', function(event) {                
+        //Get the location that the user clicked.
+        var clickedLocation = event.latLng;
+        //If the marker hasn't been added.
+        if(marker === false){
+            //Create the marker.
+            marker = new google.maps.Marker({
+                position: clickedLocation,
+                map: map,
+                draggable: true //make it draggable
+            });
+            //Listen for drag events!
+            google.maps.event.addListener(marker, 'dragend', function(event){
+                markerLocation();
+            });
+        } else{
+            //Marker has already been added, so just change its location.
+            marker.setPosition(clickedLocation);
+        }
+        //Get the marker's location.
+        markerLocation();
+    });
+
+function markerLocation(){
+    //Get location.
+    var currentLocation = marker.getPosition();
+    //Add lat and lng values to a field that we can save.
+    // document.getElementById('lat').value = currentLocation.lat(); //latitude
+    // document.getElementById('lng').value = currentLocation.lng(); //longitude
+    var lat = currentLocation.lat();
+    var lng = currentLocation.lng();
+    $.ajax({
+		 		type: "POST",
+				url: "save.php",
+				data: {lat:+lat,lng:+lng},
+				dataType: "text",
+				success: function( data ) {
+					console.log( data );
+				}
+			  });
+    console.log("Latitude :",currentLocation.lat()," Longtitude :",currentLocation.lng());
+}
+        
+        
+function newMap(map, latitude, longitude) {
+ // map = new google.maps.Map(document.getElementById('map'), {
+  //center: {lat: latitude, lng: longitude},
+  //zoom: 10
+  //});
+  var marker = new google.maps.Marker({
+    position: {lat: latitude, lng: longitude},
+    map: map,
+    //title: 'You are here'
+  });
+}
+
+function newInfo(latitude, longitude, locAccuracy) {
+  var output = document.getElementById("info");
+  var locAccuracy = Math.round(locAccuracy *= 3.28084);
+  console.log("Current Location");
+  console.log("Latitude :",latitude," Longtitude :",longitude);
+
+//    output.innerHTML = "<p>Latitude:<BR>" + latitude + "<BR><BR>Longitude:<BR>" + longitude + 
+//   "<BR><BR>Margin of error:<BR>" + locAccuracy + " feet(+/-)</p>";
+}
+
+function success(position) {
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+  var locAccuracy = position.coords.accuracy;
+  var map;
+  newMap(map, latitude, longitude);
+  newInfo(latitude, longitude, locAccuracy);
+  la(latitude, longitude);
+ $.ajax({
+		 		type: "POST",
+				url: "save.php",
+				data: {latitude:+latitude,longitude:+longitude},
+				dataType: "text",
+				success: function( data ) {
+					console.log( data );
+				}
+			  });
+}
+
+function la(latitude,longitude)
+{
+    var Slat = latitude;
+    var Slot = longitude;
+}
+
+function failure(err) {
+  if (err.code == 1) {
+    alert("Your browser is not allowing this site to locate your computer. If you want to change this, refresh the page, click the 'locate' button again, and click 'allow' when your browser asks for your permission.");
+  } else {
+    alert("Your location is unavailable.")
+  }
+}
+
+function locate() {
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(success, failure, {timeout:70000}); 
+  } else {
+    alert("Sorry, your browser doesn't support geolocation.");
+    return;
+  }
+};
+
+
+    </script>
+
+    
+
+    
+</html>

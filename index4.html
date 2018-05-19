@@ -1,0 +1,51 @@
+<html>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style> 
+        input[type=text] {
+            width: 130px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            background-image: url('searchicon.png');
+            background-position: 10px 10px; 
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+        
+        input[type=text]:focus {
+            width: 100%;
+        }
+        </style>
+        <link rel="icon" type="image/png" href="/Logo.png">
+        <script src="https://connect.soundcloud.com/sdk/sdk-3.2.1.js"></script>
+        <script>
+        //SC.initialize({
+        //  client_id: 'YOUR_CLIENT_ID'
+       // });
+        
+        // find all sounds of buskers licensed under 'creative commons share alike'
+        SC.get('/tracks', {
+          q: 'buskers', license: 'cc-by-sa'
+        }).then(function(tracks) {
+          console.log(tracks);
+        });
+        var track_url = 'http://soundcloud.com/forss/flickermood';
+SC.oEmbed(track_url, { auto_play: true }).then(function(oEmbed) {
+  console.log('oEmbed response: ', oEmbed);
+});
+        </script>
+            <script>
+                    $.getJSON('https://api.ipify.org?format=json', function(data){
+                    console.log(data.ip);
+                });
+                      </script>
+        <body>
+            <form>
+                <input type="teany xt" name="search" placeholder="Search..">
+              </form>
+        </body>
+</html>

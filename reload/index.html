@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="ma.js"></script> -->
+</head>
+<body>
+    <button id="button">refresh</button>
+    <script = "type/javascript">
+    // localStorage.setItem("update", "0");
+   
+        window.onload=function(){
+      var ab = 0;
+    $.post('save.php', {abc: ab});
+}
+
+$('body').on('click', '#button', function(){
+    // localStorage.setItem("update", "1");
+    var ab = 1;
+    $.post('save.php', {abc: ab});
+});
+
+</script>
+</body>
+</html>

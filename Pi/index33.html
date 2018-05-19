@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	
+<head>
+    <title>SpeedoMeter</title>    
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">    
+<meta name="Description" content="Measure how fast you are travelling in your vehicle with online SpeedoMeter Car Dashboard GPS.">
+<meta name="Keywords" content="speedometer,car dashboard,car speed,measure speed, speedometer app,webapp,online">
+<meta property="og:title" content="Online SpeedoMeter Car Dashboard with GPS">
+<meta property="og:type" content="website">
+<meta property="og:description" content="Measure how fast you are travelling in your vehicle with online SpeedoMeter Car Dashboard with GPS">
+<meta property="og:image" content="speedometer-online-webapp.png">
+<meta property="og:url" content="index.html">
+
+<meta itemprop="description" content="Measure how fast you are travelling in your vehicle with online SpeedoMeter Car Dashboard with GPS">
+
+    <link rel="apple-touch-icon" href="icon-72.png" />
+     
+    
+    <link rel="stylesheet" type="text/css" href="css/speedometer.css" media="screen" />
+    
+    <script type="text/javascript" src="js/jquery-1.4.2.js"></script>
+	<script type="text/javascript" src="js/speedometer.js"></script>
+        <script type="text/javascript" src="phonegap.0.9.4.js"></script>
+<style>
+	marquee {
+					position: absolute;
+					color:white;
+					bottom: 150px;
+					width: 350px;
+				}
+</style>
+
+</head>
+<body>
+<div id="landscape" ontouchmove="touchMove(event);">
+	<!-- speedometer screen -->
+	<div id="speedometer">
+		<input type="button" id="configurationButton" />
+		<div id="needle"></div>	
+		<div id="speed">0</div>
+		
+		<div id="metric">kmh</div>	
+		<div id="accuracy"></div>
+		<div id="gpsMessage">No signal</div>
+		<marquee><b><div id="limit"></div></b></marquee>
+	</div>
+	<!-- configuration screen -->
+	<div id="configuration">
+		<ul id="themes">
+			<li><a id="themeButton1" href="#"></a></li>
+			<li><a id="themeButton2" href="#"></a></li>
+		  <li><a id="themeButton3" href="#"></a></li>
+		  <li><a id="themeButton4" href="#"></a></li>
+		  <li><a id="themeButton5" href="#"></a></li>
+		  <li><a id="themeButton6" href="#"></a></li>	
+		</ul>
+		<div class="toolbar">
+			<input type="button" id="saveButton" value="Save" />
+		</div>
+	</div>
+
+</div>
+<div id="portrait" ontouchmove="touchMove(event);"></div>
+
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=7204680; 
+var sc_invisible=1; 
+var sc_security="2396ba7e"; 
+var sc_https=1; 
+var sc_remove_link=1; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><img class="statcounter"
+src="../c.statcounter.com/7204680/0/2396ba7e/1/index.html"
+alt="web analytics"></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<!-- <script type="text/javascript" src="../s7.addthis.com/js/300/addthis_widget.js#pubid=ra-548022f41b51a551" async="async"></script> -->
+
+
+</body>
+
+</html>
